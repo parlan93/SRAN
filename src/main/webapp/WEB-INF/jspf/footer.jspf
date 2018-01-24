@@ -1,0 +1,16 @@
+<%-- FOOTER --%>
+<%@ page pageEncoding="UTF-8" %>
+<footer class="footer">
+    <div class="container-fluid">
+        <div class="row footer-row">
+            <div class="col-xs-12">
+                <div class="footer-content-wrapper">
+                    <span class="footer-info">Projektowanie Serwisów Sieciowych</span><br />
+                    <span class="footer-info">Informatyka Stosowana</span><br />
+                    <span class="footer-info">Rok IV - Semestr VII</span><br />
+                    <span class="footer-info">Grupa 5: <span class="footer-authors">Joanna Nowakowska, Bartłomiej Skibiński</span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

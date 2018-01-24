@@ -1,0 +1,15 @@
+<%-- HEADER --%>
+<%@ page pageEncoding="UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- HEADER -->
+<header class="header">
+    <div class="container-fluid">
+        <div class="row header-row">
+            <div class="col-xs-12">
+                <div class="header-content-wrapper">
+                    <img class="img-responsive header-logo" src="<c:url value="/resources/images/utp-logo.png" />" alt="UTP" title="UTP">
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
