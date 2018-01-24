@@ -1,0 +1,54 @@
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+# =========================
+# Operating System Files
+# =========================
+
+# OSX
+# =========================
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+/src/main/resources/
+/src/main/webapp/resources/css/style.css
+/src/main/webapp/resources/css/style.min.css
+/src/main/webapp/resources/js/less.min.js
+/src/main/webapp/WEB-INF/jsp/
+/replay_pid4460.log
+/hs_err_pid4460.log
+/.classpath
+/.project
+/sql.txt
+/.settings/
