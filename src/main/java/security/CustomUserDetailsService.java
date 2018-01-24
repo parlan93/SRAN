@@ -56,6 +56,8 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     private void deleteAll() {
+        reviewRepository.deleteAll();
+        articleRepository.deleteAll();
         userRepository.deleteAll();
         userRolesRepository.deleteAll();
     }
@@ -73,8 +75,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         UserRole ur4 = new UserRole(u4.getUserid(), "REVIEWER");
         userRolesRepository.save(Arrays.asList(ur1, ur2, ur3, ur4));
 
-        Article a1 = new Article("Artykuł 1", "Kubuś Puchatek", "none", "none", ReviewStatus.TO_REVIEW, ArticleStatus.NEW);
-        Article a2 = new Article("Artykuł 2", "Kubuś Puchatek, Tygrysek", "none", "none", ReviewStatus.TO_REVIEW, ArticleStatus.NEW);
+        Article a1 = new Article("Artykuł 1", u2, "Kubuś Puchatek", "none", "none", ReviewStatus.TO_REVIEW, ArticleStatus.NEW);
+        Article a2 = new Article("Artykuł 2", u2, "Kubuś Puchatek, Tygrysek", "none", "none", ReviewStatus.TO_REVIEW, ArticleStatus.NEW);
         articleRepository.save(Arrays.asList(a1, a2));
 
         Review r1 = new Review(a1, u3, ReviewStatus.POSITIVE, "hahaha");

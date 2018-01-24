@@ -1,12 +1,16 @@
 package domain;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -26,6 +30,10 @@ public class Article implements Serializable {
 
     @Column(name = "title", length = 2047)
     private String title;
+
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = User.class, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "sender")
+    private User sender;
 
     @Column(name = "authors", length = 2047)
     private String authors;
@@ -47,13 +55,24 @@ public class Article implements Serializable {
     public Article() {
     }
 
-    public Article(String title, String authors, String filePathWithNames, String filePathWithoutNames, ReviewStatus reviewStatus, ArticleStatus articleStatus) {
+    public Article(String title, User sender, String authors, String filePathWithNames, String filePathWithoutNames, ReviewStatus reviewStatus, ArticleStatus articleStatus) {
         this.title = title;
+        this.sender = sender;
         this.authors = authors;
         this.filePathWithNames = filePathWithNames;
         this.filePathWithoutNames = filePathWithoutNames;
         this.reviewStatus = reviewStatus;
         this.articleStatus = articleStatus;
+    }
+
+    public Article(String title, User sender, String authors, String filePathWithNames, String filePathWithoutNames) {
+        this.title = title;
+        this.sender = sender;
+        this.authors = authors;
+        this.filePathWithNames = filePathWithNames;
+        this.filePathWithoutNames = filePathWithoutNames;
+        this.reviewStatus = ReviewStatus.TO_REVIEW;
+        this.articleStatus = ArticleStatus.NEW;
     }
 
     public Long getArticleId() {
@@ -106,6 +125,14 @@ public class Article implements Serializable {
 
     public void setArticleStatus(ArticleStatus articleStatus) {
         this.articleStatus = articleStatus;
+    }
+
+    public User getSender() {
+        return sender;
+    }
+
+    public void setSender(User sender) {
+        this.sender = sender;
     }
 
 }
