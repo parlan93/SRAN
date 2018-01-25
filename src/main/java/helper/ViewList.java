@@ -19,4 +19,6 @@ public class ViewList {
     public static final ViewItem REVIEWER_REVIEW_SAVE = new ViewItem("Zapis", "fa-meh-o", "/reviewer/review/save");
     
     public static final ViewItem AUTHOR_ARTICLE_DETAILS = new ViewItem("Artykuł", "fa-file-o", "/author/details");
+    public static final ViewItem AUTHOR_ARTICLE_ADD = new ViewItem("Dodaj artykuł", "fa-plus-square", "/author/add-article");
+    public static final ViewItem AUTHOR_ARTICLE_REVISION = new ViewItem("Dodaj poprawioną wersję artykułu", "fa-plus-square", "/author/add-revised-article");
 }

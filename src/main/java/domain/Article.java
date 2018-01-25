@@ -52,6 +52,12 @@ public class Article implements Serializable {
     @Column(name = "article_status")
     private ArticleStatus articleStatus;
 
+    @Column(name = "revisedFilePathWithNames")
+    private String revisedFilePathWithNames;
+
+    @Column(name = "revisedFilePathWithoutNames")
+    private String revisedFilePathWithoutNames;
+
     public Article() {
     }
 
@@ -63,6 +69,8 @@ public class Article implements Serializable {
         this.filePathWithoutNames = filePathWithoutNames;
         this.reviewStatus = reviewStatus;
         this.articleStatus = articleStatus;
+        this.revisedFilePathWithNames = "";
+        this.revisedFilePathWithoutNames = "";
     }
 
     public Article(String title, User sender, String authors, String filePathWithNames, String filePathWithoutNames) {
@@ -73,6 +81,8 @@ public class Article implements Serializable {
         this.filePathWithoutNames = filePathWithoutNames;
         this.reviewStatus = ReviewStatus.TO_REVIEW;
         this.articleStatus = ArticleStatus.NEW;
+        this.revisedFilePathWithNames = "";
+        this.revisedFilePathWithoutNames = "";
     }
 
     public Long getArticleId() {
@@ -133,6 +143,22 @@ public class Article implements Serializable {
 
     public void setSender(User sender) {
         this.sender = sender;
+    }
+
+    public String getRevisedFilePathWithNames() {
+        return revisedFilePathWithNames;
+    }
+
+    public void setRevisedFilePathWithNames(String revisedFilePathWithNames) {
+        this.revisedFilePathWithNames = revisedFilePathWithNames;
+    }
+
+    public String getRevisedFilePathWithoutNames() {
+        return revisedFilePathWithoutNames;
+    }
+
+    public void setRevisedFilePathWithoutNames(String revisedFilePathWithoutNames) {
+        this.revisedFilePathWithoutNames = revisedFilePathWithoutNames;
     }
 
 }

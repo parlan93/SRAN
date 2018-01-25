@@ -70,7 +70,7 @@
                                     <input type="hidden" name="article-id" value="${article.articleId}" />
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                     <button type="submit" value="submit" class="btn btn-success">Oceń</button>
-                                    <button type="reset" value="submit" class="btn btn-primary">Zresetuj</button>
+                                    <button type="reset" value="reset" class="btn btn-primary">Zresetuj</button>
                                 </form>
                             </div>
                         </div>

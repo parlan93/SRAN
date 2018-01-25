@@ -109,4 +109,30 @@ public class ReviewerController {
 
         FileCopyUtils.copy(inputStream, response.getOutputStream());
     }
+    
+    @RequestMapping(value = "/show/revised/{id}")
+    public void showRevisedArticle(@PathVariable(value = "id") String articleId, HttpServletResponse response) throws FileNotFoundException, IOException {
+        Article article = articleRepository.findOne(Long.valueOf(articleId));
+
+        File file = new File(article.getRevisedFilePathWithoutNames());
+        if (!file.exists()) {
+            LOG.log(Level.INFO, "File not found");
+            return;
+        }
+
+        String mimeType = URLConnection.guessContentTypeFromName(file.getName());
+        if (mimeType == null) {
+            LOG.log(Level.INFO, "mimeType not detectable");
+            mimeType = "application/octet-stream";
+        }
+        LOG.log(Level.INFO, "MimeType: {0}", mimeType);
+
+        response.setContentType(mimeType);
+        response.setHeader("Content-Disposition", String.format("inline; filename=\"" + file.getName() + "\""));
+        response.setContentLength((int) file.length());
+
+        InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
+
+        FileCopyUtils.copy(inputStream, response.getOutputStream());
+    }
 }

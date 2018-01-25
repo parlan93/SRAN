@@ -17,7 +17,13 @@
 
                 <%@include file="jspf/title.jspf" %>
 
-                <div class="row row-content">
+                <div class="row segment-row">
+                    <div class="col-xs-12">
+                        <span class="segment-title">Użytkownicy</span>
+                    </div>
+                </div>
+                
+                <div class="row row-content admin-row">
                     <div class="col-xs-12">
 
                         <div class="table-wrapper">
@@ -155,7 +161,17 @@
 
                             </table>
                         </div>
-                        <div>Artykuły</div>
+                    </div>
+                </div>
+                
+                <div class="row segment-row">
+                    <div class="col-xs-12">
+                        <span class="segment-title">Artykuły</span>
+                    </div>
+                </div>
+                
+                <div class="row row-content admin-row">
+                    <div class="col-xs-12">
                         <div class="table-wrapper">
                             <table class="table table-striped table-bordered table-hover no-footer table-common">
 

@@ -117,3 +117,15 @@ body {
 .logged-logout { display: inline; }
 
 .login-panel { margin-top: 0; }
+
+.segment-title {
+    font-weight: 700;
+    font-size: 18px;
+}
+.admin-row,
+.author-row {
+    margin-top: 0;
+}
+.segment-row {
+    margin: 4px 12px 0px;
+}

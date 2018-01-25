@@ -17,8 +17,21 @@
 
                 <%@include file="jspf/title.jspf" %>
 
-                <div class="row row-content">
+                <div class="row row-content segment-row">
                     <div class="col-xs-12">
+                        <a href="${currentPage.link}/add-article" class="btn btn-success" title="Dodaj artykuł">Dodaj artykuł</a>
+                    </div>
+                </div>
+
+                <div class="row row-content author-row">
+                    <div class="col-xs-12">
+
+                        <c:if test="${save eq 'successed'}">
+                            <div class="alert alert-success">Pomyślnie dodano artykuł!</div>
+                        </c:if>
+                        <c:if test="${revise eq 'successed'}">
+                            <div class="alert alert-success">Pomyślnie dodano poprawiony artykuł!</div>
+                        </c:if>    
 
                         <div class="table-wrapper">
                             <table class="table table-striped table-bordered table-hover no-footer table-common">
@@ -61,8 +74,30 @@
                                             <c:when test="${counter.count % 2 == 0}">
                                                 <tr class="table-row table-row-even">
                                                     <td class="table-cell row-actions">
-                                                        <a href="${currentPage.link}/show/${item.articleId}" title="Podgląd artykułu" class="btn btn-info button-table"><i class="fa fa-file-pdf-o"></i></a>
-                                                        <a href="${currentPage.link}/details/${item.articleId}" title="Szczegóły artykułu" class="btn btn-warning button-table"><i class="fa fa-eye"></i></a>
+                                                        <c:choose>
+                                                            <c:when test="${item.revisedFilePathWithNames eq ''}">
+                                                                <a href="${currentPage.link}/show/${item.articleId}" title="Podgląd artykułu" class="btn btn-info button-table">
+                                                                    <i class="fa fa-file-pdf-o"></i>
+                                                                </a>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <a href="${currentPage.link}/show/revised/${item.articleId}" title="Podgląd artykułu" class="btn btn-info button-table">
+                                                                    <i class="fa fa-file-pdf-o"></i>
+                                                                </a>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                        <a href="${currentPage.link}/details/${item.articleId}" title="Szczegóły artykułu" class="btn btn-warning button-table">
+                                                            <i class="fa fa-eye"></i>
+                                                        </a>
+                                                        <c:choose>
+                                                            <c:when test="${item.articleStatus.plName eq 'Oceniony do poprawy'}">
+                                                                <a href="${currentPage.link}/add-revised-article/${item.articleId}" title="Dodaj poprawioną wersję" class="btn btn-primary button-table">
+                                                                    <i class="fa fa-plus"></i>
+                                                                </a>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </td>
                                                     <td class="table-cell">${item.title}</td>
                                                     <td class="table-cell">${item.sender.firstname} ${item.sender.lastname}</td>
@@ -73,8 +108,30 @@
                                             <c:otherwise>
                                                 <tr class="table-row table-row-odd">
                                                     <td class="table-cell row-actions">
-                                                        <a href="${currentPage.link}/show/${item.articleId}" title="Podgląd artykułu" class="btn btn-info button-table"><i class="fa fa-file-pdf-o"></i></a>
-                                                        <a href="${currentPage.link}/details/${item.articleId}" title="Szczegóły artykułu" class="btn btn-warning button-table"><i class="fa fa-eye"></i></a>
+                                                        <c:choose>
+                                                            <c:when test="${item.revisedFilePathWithNames eq ''}">
+                                                                <a href="${currentPage.link}/show/${item.articleId}" title="Podgląd artykułu" class="btn btn-info button-table">
+                                                                    <i class="fa fa-file-pdf-o"></i>
+                                                                </a>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <a href="${currentPage.link}/show/revised/${item.articleId}" title="Podgląd artykułu" class="btn btn-info button-table">
+                                                                    <i class="fa fa-file-pdf-o"></i>
+                                                                </a>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                        <a href="${currentPage.link}/details/${item.articleId}" title="Szczegóły artykułu" class="btn btn-warning button-table">
+                                                            <i class="fa fa-eye"></i>
+                                                        </a>
+                                                        <c:choose>
+                                                            <c:when test="${item.articleStatus.plName eq 'Oceniony do poprawy'}">
+                                                                <a href="${currentPage.link}/add-revised-article/${item.articleId}" title="Dodaj poprawioną wersję" class="btn btn-primary button-table">
+                                                                    <i class="fa fa-plus"></i>
+                                                                </a>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </td>
                                                     <td class="table-cell">${item.title}</td>
                                                     <td class="table-cell">${item.sender.firstname} ${item.sender.lastname}</td>

@@ -59,9 +59,18 @@
                                             <c:when test="${counter.count % 2 == 0}">
                                                 <tr class="table-row table-row-even">
                                                     <td class="table-cell row-actions">
-                                                        <a href="${currentPage.link}/show/${item.article.articleId}" title="Podgląd" class="btn btn-info button-table">
-                                                            <i class="fa fa-file-pdf-o"></i>
-                                                        </a>
+                                                        <c:choose>
+                                                            <c:when test="${item.article.revisedFilePathWithoutNames eq ''}">
+                                                                <a href="${currentPage.link}/show/${item.article.articleId}" title="Podgląd artykułu" class="btn btn-info button-table">
+                                                                    <i class="fa fa-file-pdf-o"></i>
+                                                                </a>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <a href="${currentPage.link}/show/revised/${item.article.articleId}" title="Podgląd artykułu" class="btn btn-info button-table">
+                                                                    <i class="fa fa-file-pdf-o"></i>
+                                                                </a>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                         <c:choose>
                                                             <c:when test="${item.reviewStatus.plName eq 'Do recenzji' or item.reviewStatus.plName eq 'Do ponownej recenzji'}">
                                                                 <a href="${currentPage.link}/review/${item.article.articleId}" title="Wystaw recenzję" class="btn btn-warning button-table">
@@ -79,9 +88,18 @@
                                             <c:otherwise>
                                                 <tr class="table-row table-row-odd">
                                                     <td class="table-cell row-actions">
-                                                        <a href="${currentPage.link}/show/${item.article.articleId}" title="Podgląd" class="btn btn-info button-table">
-                                                            <i class="fa fa-file-pdf-o"></i>
-                                                        </a>
+                                                        <c:choose>
+                                                            <c:when test="${item.article.revisedFilePathWithoutNames eq ''}">
+                                                                <a href="${currentPage.link}/show/${item.article.articleId}" title="Podgląd artykułu" class="btn btn-info button-table">
+                                                                    <i class="fa fa-file-pdf-o"></i>
+                                                                </a>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <a href="${currentPage.link}/show/revised/${item.article.articleId}" title="Podgląd artykułu" class="btn btn-info button-table">
+                                                                    <i class="fa fa-file-pdf-o"></i>
+                                                                </a>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                         <c:choose>
                                                             <c:when test="${item.reviewStatus.plName eq 'Do recenzji' or item.reviewStatus.plName eq 'Do ponownej recenzji'}">
                                                                 <a href="${currentPage.link}/review/${item.article.articleId}" title="Wystaw recenzję" class="btn btn-warning button-table">
