@@ -18,8 +18,12 @@
                 <%@include file="jspf/title.jspf" %>
 
                 <div class="row row-content">
-                    <div class="col-xs-12">
-                        <!--TODO: Strona błędu braku uprawnień-->
+                    <div class="col-md-4 col-md-offset-4">
+                        <div class="panel-body">
+                            <div class="alert alert-danger">
+                                Błąd 403: Brak uprawnień. <a href="/" class="alert-link">Wróć na stronę główną</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

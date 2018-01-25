@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
     <%@include file="jspf/head.jspf" %>
@@ -20,9 +20,13 @@
 
                 <div class="row row-content">
                     <div class="col-xs-12">
-                        <sec:authorize access="isAuthenticated()">
-                            authenticated as <sec:authentication property="principal.username" /> 
-                        </sec:authorize>
+
+                        <c:if test="${success eq 'success'}">
+                            <div class="alert alert-success">
+                                Zapisano recenzję!
+                            </div>
+                        </c:if>
+
                         <div class="table-wrapper">
                             <table class="table table-striped table-bordered table-hover no-footer table-common">
 
@@ -55,8 +59,18 @@
                                             <c:when test="${counter.count % 2 == 0}">
                                                 <tr class="table-row table-row-even">
                                                     <td class="table-cell row-actions">
-                                                        <a href="${currentPage.link}/show/${item.article.articleId}" title="Podgląd" class="btn btn-info button-table"><i class="fa fa-file-pdf-o"></i></a>
-                                                        <a href="${currentPage.link}/review/${item.article.articleId}" title="Wystaw recenzję" class="btn btn-warning button-table"><i class="fa fa-pencil-square-o"></i></a>
+                                                        <a href="${currentPage.link}/show/${item.article.articleId}" title="Podgląd" class="btn btn-info button-table">
+                                                            <i class="fa fa-file-pdf-o"></i>
+                                                        </a>
+                                                        <c:choose>
+                                                            <c:when test="${item.reviewStatus.plName eq 'Do recenzji' or item.reviewStatus.plName eq 'Do ponownej recenzji'}">
+                                                                <a href="${currentPage.link}/review/${item.article.articleId}" title="Wystaw recenzję" class="btn btn-warning button-table">
+                                                                    <i class="fa fa-pencil-square-o"></i>
+                                                                </a>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </td>
                                                     <td class="table-cell">${item.article.title}</td>
                                                     <td class="table-cell">${item.reviewStatus.plName}</td>
@@ -65,8 +79,18 @@
                                             <c:otherwise>
                                                 <tr class="table-row table-row-odd">
                                                     <td class="table-cell row-actions">
-                                                        <a href="${currentPage.link}/show/${item.article.articleId}" title="Podgląd" class="btn btn-info button-table"><i class="fa fa-file-pdf-o"></i></a>
-                                                        <a href="${currentPage.link}/review/${item.article.articleId}" title="Wystaw recenzję" class="btn btn-warning button-table"><i class="fa fa-pencil-square-o"></i></a>
+                                                        <a href="${currentPage.link}/show/${item.article.articleId}" title="Podgląd" class="btn btn-info button-table">
+                                                            <i class="fa fa-file-pdf-o"></i>
+                                                        </a>
+                                                        <c:choose>
+                                                            <c:when test="${item.reviewStatus.plName eq 'Do recenzji' or item.reviewStatus.plName eq 'Do ponownej recenzji'}">
+                                                                <a href="${currentPage.link}/review/${item.article.articleId}" title="Wystaw recenzję" class="btn btn-warning button-table">
+                                                                    <i class="fa fa-pencil-square-o"></i>
+                                                                </a>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </td>
                                                     <td class="table-cell">${item.article.title}</td>
                                                     <td class="table-cell">${item.reviewStatus.plName}</td>

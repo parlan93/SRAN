@@ -18,17 +18,80 @@
                 <%@include file="jspf/title.jspf" %>
 
                 <div class="row row-content">
+                    <div class="col-xs-12 col-md-6 col-md-offset-3">
+                        <c:if test="${success eq 'success'}">
+                            <div class="alert alert-success">Utworzono nowego użytkownika! Czekaj na włączenie konta przez Administratora!</div>
+                        </c:if>
+                    </div>
+                </div>
+                <div class="row row-content">
                     <div class="col-xs-12 col-md-4">
-                        <!--TODO: Kafel panel autora-->
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius ligula sed magna pulvinar, quis ultrices ex venenatis. Mauris suscipit, ex et accumsan pretium, leo mauris suscipit nisi, et rutrum magna mauris nec massa. Aliquam velit lectus, sodales in velit consectetur, facilisis hendrerit tellus. Donec fermentum neque eget blandit efficitur. Ut facilisis ac ex interdum rutrum. Etiam ut eleifend ante. Integer pellentesque, dolor id bibendum sollicitudin, risus leo placerat ex, vel imperdiet urna tellus eget diam. Nam faucibus dignissim tortor, eget molestie massa varius quis. Nunc ultricies sapien sed erat finibus tristique. In hac habitasse platea dictumst.
+
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-user fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <!--<div class="huge"><h:outputText value="" /></div>-->
+                                        <div>Panel autora</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a id="seeBooks" href="/author">
+                                <div class="panel-footer">
+                                    <span class="pull-left">Zaloguj się</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+
                     </div>
                     <div class="col-xs-12 col-md-4">
-                        <!--TODO: Kafel panel recenzenta-->
-                        Quisque neque neque, imperdiet vel orci quis, pellentesque pulvinar dui. Donec ut pellentesque libero, nec vestibulum arcu. Sed vehicula tellus eget tempor dignissim. Quisque interdum lobortis felis, at tincidunt tellus feugiat nec. Suspendisse dui nisi, vestibulum eget congue sit amet, tempus at mi. Pellentesque elementum turpis aliquam dignissim posuere. Nullam eu magna eu mauris pretium egestas. Nullam ligula nisi, sagittis id hendrerit nec, consectetur nec sem. Nunc sed fringilla nulla. Suspendisse ut dolor sed sapien ornare fringilla vitae sit amet libero. Fusce eu posuere nulla, in aliquet orci.
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-user fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <!--<div class="huge"><h:outputText value="" /></div>-->
+                                        <div>Panel recenzenta</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a id="seeAlbums" href="/reviewer">
+                                <div class="panel-footer">
+                                    <span class="pull-left">Zaloguj się</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                     <div class="col-xs-12 col-md-4">
-                        <!--TODO: Kafel panel admina-->
-                        Pellentesque tristique arcu nulla, non vulputate lacus dapibus a. Maecenas tincidunt mauris augue, ut placerat ligula lobortis ac. Praesent lectus elit, auctor a consequat in, rutrum vitae magna. Etiam auctor sem non feugiat malesuada. Aenean porta eleifend turpis in ullamcorper. Nam neque magna, feugiat nec cursus non, placerat vel ex. Aenean semper libero eget dui facilisis, vel mollis turpis facilisis. Donec condimentum libero quam, id auctor elit congue vel. In tincidunt leo nec tortor viverra, et ullamcorper erat rutrum. Aenean libero elit, porta non convallis nec, gravida vitae tellus. Cras tristique magna leo, sit amet consectetur arcu pellentesque vel. Curabitur et turpis arcu. 
+                        <div class="panel panel-yellow">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-user fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <!--<div class="huge"><h:outputText value="" /></div>-->
+                                        <div>Panel administratora</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a id="seeMovies" href="/admin">
+                                <div class="panel-footer">
+                                    <span class="pull-left">Zaloguj się</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
 

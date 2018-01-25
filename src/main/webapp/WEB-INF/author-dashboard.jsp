@@ -19,7 +19,77 @@
 
                 <div class="row row-content">
                     <div class="col-xs-12">
-                        <!--TODO: Panel autora-->
+
+                        <div class="table-wrapper">
+                            <table class="table table-striped table-bordered table-hover no-footer table-common">
+
+                                <!-- THEAD -->
+                                <thead>
+                                    <tr class="table-header-row">
+                                        <th class="table-header-cell width-80">
+                                            <div class="cell-content">
+                                                <span class="cell-content-text">Akcje</span>
+                                            </div>
+                                        </th>
+                                        <th class="table-header-cell width-max">
+                                            <div class="cell-content">
+                                                <span class="cell-content-text">Tytuł</span>
+                                            </div>
+                                        </th>
+                                        <th class="table-header-cell width-max">
+                                            <div class="cell-content">
+                                                <span class="cell-content-text">Autor główny</span>
+                                            </div>
+                                        </th>
+                                        <th class="table-header-cell width-max">
+                                            <div class="cell-content">
+                                                <span class="cell-content-text">Status recenzji</span>
+                                            </div>
+                                        </th>
+                                        <th class="table-header-cell width-max">
+                                            <div class="cell-content">
+                                                <span class="cell-content-text">Status artykułu</span>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </thead>
+
+                                <!-- TBODY -->
+                                <tbody>
+                                    <c:forEach items="${data}" var="item" varStatus="counter">
+                                        <c:choose>
+                                            <c:when test="${counter.count % 2 == 0}">
+                                                <tr class="table-row table-row-even">
+                                                    <td class="table-cell row-actions">
+                                                        <a href="${currentPage.link}/show/${item.articleId}" title="Podgląd artykułu" class="btn btn-info button-table"><i class="fa fa-file-pdf-o"></i></a>
+                                                        <a href="${currentPage.link}/details/${item.articleId}" title="Szczegóły artykułu" class="btn btn-warning button-table"><i class="fa fa-eye"></i></a>
+                                                    </td>
+                                                    <td class="table-cell">${item.title}</td>
+                                                    <td class="table-cell">${item.sender.firstname} ${item.sender.lastname}</td>
+                                                    <td class="table-cell">${item.reviewStatus.plName}</td>
+                                                    <td class="table-cell">${item.articleStatus.plName}</td>
+                                                </tr>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <tr class="table-row table-row-odd">
+                                                    <td class="table-cell row-actions">
+                                                        <a href="${currentPage.link}/show/${item.articleId}" title="Podgląd artykułu" class="btn btn-info button-table"><i class="fa fa-file-pdf-o"></i></a>
+                                                        <a href="${currentPage.link}/details/${item.articleId}" title="Szczegóły artykułu" class="btn btn-warning button-table"><i class="fa fa-eye"></i></a>
+                                                    </td>
+                                                    <td class="table-cell">${item.title}</td>
+                                                    <td class="table-cell">${item.sender.firstname} ${item.sender.lastname}</td>
+                                                    <td class="table-cell">${item.reviewStatus.plName}</td>
+                                                    <td class="table-cell">${item.articleStatus.plName}</td>
+                                                </tr>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:forEach>
+
+                                </tbody>
+
+                            </table>
+                        </div>
+
                     </div>
                 </div>
 

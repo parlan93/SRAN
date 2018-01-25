@@ -75,7 +75,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         UserRole ur4 = new UserRole(u4.getUserid(), "REVIEWER");
         userRolesRepository.save(Arrays.asList(ur1, ur2, ur3, ur4));
 
-        Article a1 = new Article("Artykuł 1", u2, "Kubuś Puchatek", "none", "none", ReviewStatus.TO_REVIEW, ArticleStatus.NEW);
+        Article a1 = new Article("Artykuł 1", u2, "Kubuś Puchatek", "G:/DATA/PSS/art-1-z.pdf", "G:/DATA/PSS/art-1-bez.pdf", ReviewStatus.TO_REVIEW, ArticleStatus.NEW);
         Article a2 = new Article("Artykuł 2", u2, "Kubuś Puchatek, Tygrysek", "none", "none", ReviewStatus.TO_REVIEW, ArticleStatus.NEW);
         articleRepository.save(Arrays.asList(a1, a2));
 
@@ -84,5 +84,5 @@ public class CustomUserDetailsService implements UserDetailsService {
         Review r3 = new Review(a2, u4, ReviewStatus.NEGATIVE, "Lol");
         reviewRepository.save(Arrays.asList(r1, r2, r3));
     }
-
+    
 }

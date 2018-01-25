@@ -1,6 +1,6 @@
 <%-- 
-    Document   : 404
-    Created on : 2018-01-24, 13:03:47
+    Document   : reviewer-review-save
+    Created on : 2018-01-24, 18:35:00
     Author     : Bartłomiej Skibiński
 --%>
 
@@ -19,7 +19,9 @@
 
                 <div class="row row-content">
                     <div class="col-xs-12">
-                        <!--TODO: Strona błędu Not found-->
+                        <!--TODO: Ogarnąć-->
+                        Haha ha
+                        ${desc}
                     </div>
                 </div>
 

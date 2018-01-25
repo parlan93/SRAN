@@ -18,34 +18,34 @@
                 <%@include file="jspf/title.jspf" %>
 
                 <div class="row row-content">
-                    <div class="col-xs-12">
-                        <!--TODO: Logowanie-->
-                        <form action="/login" method="post">
-
-                            <div class="lc-block">
-                                <div>
-                                    <input type="text" class="style-4" name="username"
-                                           placeholder="User Name" />
-                                </div>
-                                <div>
-                                    <input type="password" class="style-4" name="password"
-                                           placeholder="Password" />
-                                </div>
-                                <div>
-                                    <input type="submit" value="Sign In" class="button red small" />
-                                </div>
-                                <c:if test="${param.error ne null}">
-                                    <div class="alert-danger">Invalid username and password.</div>
-                                </c:if>
-                                <c:if test="${param.logout ne null}">
-                                    <div class="alert-normal">You have been logged out.</div>
-                                </c:if>
+                    <div class="col-md-4 col-md-offset-4">
+                        <c:if test="${param.error ne null}">
+                            <div class="alert alert-danger">Nieprawidłowy login lub hasło! <a href="/" class="alert-link">Wróć na stronę główną</a></div>
+                        </c:if>
+                        <c:if test="${param.logout ne null}">
+                            <div class="alert alert-success">Pomyślnie wylogowano! <a href="/" class="alert-link">Wróć na stronę główną</a></div>
+                        </c:if>
+                        <div class="login-panel panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Logowanie</h3>
                             </div>
-                            <input type="hidden" name="${_csrf.parameterName}"
-                                   value="${_csrf.token}" />
-                        </form>
-
-                    </div>
+                            <div class="panel-body">
+                                <form action="/login" method="post">
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <input class="form-control" placeholder="Login" name="username" type="text" autofocus>
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" placeholder="Hasło" name="password" type="password" value="">
+                                        </div>
+                                        <input type="submit" value="Zaloguj się" class="btn btn-lg btn-success btn-block"/>
+                                        <a href="/register" class="btn btn-lg btn-primary btn-block">Rejestracja</a>
+                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>  
                 </div>
 
             </div>

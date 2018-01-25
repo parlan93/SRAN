@@ -12,4 +12,8 @@ import org.springframework.stereotype.Repository;
 public interface ReviewRepository extends JpaRepository<Review, Long> {
 
     List<Review> findByUser(User user);
+    
+    Review findByUserAndArticle(User user, Article article);
+    
+    List<Review> findByArticle(Article article);
 }

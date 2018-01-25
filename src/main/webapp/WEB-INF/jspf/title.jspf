@@ -1,5 +1,6 @@
 <%-- PAGE TITLE --%>
 <%@ page pageEncoding="UTF-8" %>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <div class="row page-title-row">
     <div class="col-xs-12">
         <div class="page-title-content-wrapper">
@@ -9,3 +10,18 @@
         </div>
     </div>
 </div>
+<sec:authorize access="isAuthenticated()">
+    <div class="row logged-row">
+        <div class="col-xs-12">
+            <div class="logged-content-wrapper">
+                <h2 class="logged-title">
+                    Zalogowano jako <span class="logged-user"><sec:authentication property="principal.username" /></span>
+                </h2>
+                <form action="/logout" method="post" class="logged-logout">
+                    <input type="submit" class="btn btn-danger" value="Wyloguj" /> 
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                </form>
+            </div>
+        </div>
+    </div>
+</sec:authorize>
