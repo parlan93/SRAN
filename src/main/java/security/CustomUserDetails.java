@@ -28,7 +28,6 @@ public class CustomUserDetails extends domain.User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        // TODO Auto-generated method stub
         return true;
     }
 
@@ -44,7 +43,7 @@ public class CustomUserDetails extends domain.User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return super.getEnabled() == 1;
     }
 
     @Override

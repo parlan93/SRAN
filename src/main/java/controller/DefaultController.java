@@ -32,12 +32,6 @@ public class DefaultController {
         return "home";
     }
 
-    // TODO: Do usunięcia
-    @RequestMapping(value = "/hello")
-    public String hello(Model model) {
-        return "hello";
-    }
-
     @RequestMapping(value = "/login")
     public String login(Model model) {
         model.addAttribute("currentPage", ViewList.LOGIN);

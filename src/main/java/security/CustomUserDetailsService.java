@@ -67,22 +67,30 @@ public class CustomUserDetailsService implements UserDetailsService {
         User u2 = new User("author", BCrypt.hashpw("author", BCrypt.gensalt()), "author@author.author", "Author", "Author", 1, "Dr inż.", "UTP");
         User u3 = new User("reviewer", BCrypt.hashpw("reviewer", BCrypt.gensalt()), "rewiever@reviever.reviewer", "Reviewer", "Reviewer", 1, "Dr hab. inż.", "UKW");
         User u4 = new User("reviewer2", BCrypt.hashpw("reviewer2", BCrypt.gensalt()), "rewiever2@reviever.reviewer", "Reviewer2", "Reviewer2", 1, "Dr hab. inż.", "UKW");
-        userRepository.save(Arrays.asList(u1, u2, u3, u4));
+        User u5 = new User("grubygamon", BCrypt.hashpw("gamon", BCrypt.gensalt()), "grubygamon@gamonie.pl", "Gruby Gamoń", "Gamoniowaty", "Prof. dr hab. inż. nauk Gamoniowatych", "Uniwersytet Gamoniowatości i Spania - Wydział Spania i Zamulania po Jedzeniu");
+        User u6 = new User("hudygamon", BCrypt.hashpw("gamon", BCrypt.gensalt()), "hudygamon@gamonie.pl", "Hudy Gamoń", "Gamoniowaty", "Prof. dr hab. inż. nauk Gamoniowatych", "Uniwersytet Gamoniowatości i Spania - Wydział Relaksu i Oglądania Seriali");
+        User u7 = new User("reviewer3", BCrypt.hashpw("reviewer3", BCrypt.gensalt()), "rewiever3@reviever.reviewer", "Reviewer3", "Reviewer3", 1, "Dr hab. inż.", "UKW");
+        userRepository.save(Arrays.asList(u1, u2, u3, u4, u5, u6, u7));
 
         UserRole ur1 = new UserRole(u1.getUserid(), "ADMIN");
         UserRole ur2 = new UserRole(u2.getUserid(), "AUTHOR");
         UserRole ur3 = new UserRole(u3.getUserid(), "REVIEWER");
         UserRole ur4 = new UserRole(u4.getUserid(), "REVIEWER");
-        userRolesRepository.save(Arrays.asList(ur1, ur2, ur3, ur4));
+        UserRole ur5 = new UserRole(u7.getUserid(), "REVIEWER");
+        userRolesRepository.save(Arrays.asList(ur1, ur2, ur3, ur4, ur5));
 
         Article a1 = new Article("Artykuł 1", u2, "Kubuś Puchatek", "G:/DATA/PSS/art-1-z.pdf", "G:/DATA/PSS/art-1-bez.pdf", ReviewStatus.TO_REVIEW, ArticleStatus.NEW);
-        Article a2 = new Article("Artykuł 2", u2, "Kubuś Puchatek, Tygrysek", "none", "none", ReviewStatus.TO_REVIEW_ONCE_MORE, ArticleStatus.REVIEWED_TO_CORRECT);
-        articleRepository.save(Arrays.asList(a1, a2));
+        Article a2 = new Article("Artykuł 2", u2, "Kubuś Puchatek, Tygrysek", "G:/DATA/PSS/art-1-z.pdf", "G:/DATA/PSS/art-1-bez.pdf", ReviewStatus.TO_REVIEW_ONCE_MORE, ArticleStatus.REVIEWED_TO_CORRECT);
+        Article a3 = new Article("Wpływ gamoniostwa na egzystencję emocjonalną i fizyczną", u5, "Gruby Gamoń Gamoniowaty, Hudy Gamoń Gamoniowaty", "none", "none");
+        Article a4 = new Article("Gamonie w rozwijającej się cywilizacji", u6, "Hudy Gamoń Gamoniowaty, Gruby Gamoń Gamoniowaty", "none", "none", ReviewStatus.AMBIGUOUS, ArticleStatus.WAITING_FOR_REVIEW);
+        articleRepository.save(Arrays.asList(a1, a2, a3, a4));
 
         Review r1 = new Review(a1, u3, ReviewStatus.POSITIVE, "hahaha");
         Review r2 = new Review(a2, u3, ReviewStatus.TO_REVIEW_ONCE_MORE, "XDXD");
         Review r3 = new Review(a2, u4, ReviewStatus.NEGATIVE, "Lol");
-        reviewRepository.save(Arrays.asList(r1, r2, r3));
+        Review r4 = new Review(a4, u3, ReviewStatus.POSITIVE, "Hehehe co za gamonie XD");
+        Review r5 = new Review(a4, u4, ReviewStatus.NEGATIVE, "Hehehe no racja xd");
+        reviewRepository.save(Arrays.asList(r1, r2, r3, r4, r5));
     }
     
 }

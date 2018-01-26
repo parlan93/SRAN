@@ -43,7 +43,6 @@ public class Review implements Serializable {
     @Column(name = "description", length = 2047)
     private String description;
 
-    // TODO: Pola z formularza recenzji
     public Review() {
     }
 
@@ -52,6 +51,12 @@ public class Review implements Serializable {
         this.user = user;
         this.reviewStatus = reviewStatus;
         this.description = description;
+    }
+
+    public Review(Article article, User user, ReviewStatus reviewStatus) {
+        this.article = article;
+        this.user = user;
+        this.reviewStatus = reviewStatus;
     }
 
     public Long getReviewId() {

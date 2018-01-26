@@ -1,6 +1,6 @@
 <%-- 
-    Document   : author-article-show
-    Created on : 2018-01-24, 22:16:16
+    Document   : admin-article-details
+    Created on : 2018-01-25, 22:15:24
     Author     : Bartłomiej Skibiński
 --%>
 
@@ -20,6 +20,7 @@
                 <div class="row row-content">
                     <div class="col-xs-12">
 
+                        <!--article information-->
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="panel panel-default">
@@ -74,23 +75,52 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div><!--end article information-->
 
+                        <!--reviews-->
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         Recenzje
                                     </div>
-                                    <c:choose>
-                                        <c:when test="${article.articleStatus.plName eq 'Nowy' or article.articleStatus.plName eq 'Czeka na recenzję' or article.articleStatus.plName eq 'Czeka na ponowną recenzję'}">
-                                        </c:when>
-                                        <c:otherwise>
-                                            <div class="panel-body">
-                                                <c:forEach items="${reviews}" var="review" varStatus="counter">
+                                    <div class="panel-body">
+                                        <c:forEach items="${reviews}" var="review" varStatus="counter">
+                                            <c:choose>
+                                                <c:when test="${review.reviewStatus.plName eq 'Pozytywna'}">
+                                                    <div class="panel panel-green">
+                                                        <div class="panel-heading">
+                                                            Recenzja ${counter.index + 1} - ${review.reviewStatus.plName}
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            <div class="form-group">
+                                                                <label>Recenzent</label>
+                                                                <p class="form-control-static">${review.user.title} ${review.user.firstname} ${review.user.lastname}</p>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Email</label>
+                                                                <p class="form-control-static">${review.user.email}</p>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Organizacja</label>
+                                                                <p class="form-control-static">${review.user.organization}</p>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Recenzja</label>
+                                                                <p class="form-control-static">${review.description}</p>
+                                                            </div>
+                                                            <form action="${currentPage.link}/review/${review.reviewId}" method="post" id="review-${counter.index}">
+                                                                <input type="hidden" name="articleId" value="${review.article.articleId}" />
+                                                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                                                <input type="submit" name="submit" value="PDF" class="btn btn-default" />
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </c:when>
+                                                <c:otherwise>
                                                     <c:choose>
-                                                        <c:when test="${review.reviewStatus.plName eq 'Pozytywna'}">
-                                                            <div class="panel panel-green">
+                                                        <c:when test="${review.reviewStatus.plName eq 'Negatywna'}">
+                                                            <div class="panel panel-red">
                                                                 <div class="panel-heading">
                                                                     Recenzja ${counter.index + 1} - ${review.reviewStatus.plName}
                                                                 </div>
@@ -120,77 +150,43 @@
                                                             </div>
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <c:choose>
-                                                                <c:when test="${review.reviewStatus.plName eq 'Negatywna'}">
-                                                                    <div class="panel panel-red">
-                                                                        <div class="panel-heading">
-                                                                            Recenzja ${counter.index + 1} - ${review.reviewStatus.plName}
-                                                                        </div>
-                                                                        <div class="panel-body">
-                                                                            <div class="form-group">
-                                                                                <label>Recenzent</label>
-                                                                                <p class="form-control-static">${review.user.title} ${review.user.firstname} ${review.user.lastname}</p>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label>Email</label>
-                                                                                <p class="form-control-static">${review.user.email}</p>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label>Organizacja</label>
-                                                                                <p class="form-control-static">${review.user.organization}</p>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label>Recenzja</label>
-                                                                                <p class="form-control-static">${review.description}</p>
-                                                                            </div>
-                                                                            <form action="${currentPage.link}/review/${review.reviewId}" method="post" id="review-${counter.index}">
-                                                                                <input type="hidden" name="articleId" value="${review.article.articleId}" />
-                                                                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                                                                                <input type="submit" name="submit" value="PDF" class="btn btn-default" />
-                                                                            </form>
-                                                                        </div>
+                                                            <div class="panel panel-yellow">
+                                                                <div class="panel-heading">
+                                                                    Recenzja ${counter.index + 1} - ${review.reviewStatus.plName}
+                                                                </div>
+                                                                <div class="panel-body">
+                                                                    <div class="form-group">
+                                                                        <label>Recenzent</label>
+                                                                        <p class="form-control-static">${review.user.title} ${review.user.firstname} ${review.user.lastname}</p>
                                                                     </div>
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                    <div class="panel panel-yellow">
-                                                                        <div class="panel-heading">
-                                                                            Recenzja ${counter.index + 1} - ${review.reviewStatus.plName}
-                                                                        </div>
-                                                                        <div class="panel-body">
-                                                                            <div class="form-group">
-                                                                                <label>Recenzent</label>
-                                                                                <p class="form-control-static">${review.user.title} ${review.user.firstname} ${review.user.lastname}</p>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label>Email</label>
-                                                                                <p class="form-control-static">${review.user.email}</p>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label>Organizacja</label>
-                                                                                <p class="form-control-static">${review.user.organization}</p>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label>Recenzja</label>
-                                                                                <p class="form-control-static">${review.description}</p>
-                                                                            </div>
-                                                                            <form action="${currentPage.link}/review/${review.reviewId}" method="post" id="review-${counter.index}">
-                                                                                <input type="hidden" name="articleId" value="${review.article.articleId}" />
-                                                                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                                                                                <input type="submit" name="submit" value="PDF" class="btn btn-default" />
-                                                                            </form>
-                                                                        </div>
+                                                                    <div class="form-group">
+                                                                        <label>Email</label>
+                                                                        <p class="form-control-static">${review.user.email}</p>
                                                                     </div>
-                                                                </c:otherwise>
-                                                            </c:choose>
+                                                                    <div class="form-group">
+                                                                        <label>Organizacja</label>
+                                                                        <p class="form-control-static">${review.user.organization}</p>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label>Recenzja</label>
+                                                                        <p class="form-control-static">${review.description}</p>
+                                                                    </div>
+                                                                    <form action="${currentPage.link}/review/${review.reviewId}" method="post" id="review-${counter.index}">
+                                                                        <input type="hidden" name="articleId" value="${review.article.articleId}" />
+                                                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                                                        <input type="submit" name="submit" value="PDF" class="btn btn-default" />
+                                                                    </form>
+                                                                </div>
+                                                            </div>
                                                         </c:otherwise>
                                                     </c:choose>
-                                                </c:forEach>
-                                            </div>
-                                        </c:otherwise>
-                                    </c:choose>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:forEach>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </div><!--end reviews-->
 
                     </div>
                 </div>

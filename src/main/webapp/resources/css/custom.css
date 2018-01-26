@@ -3,7 +3,7 @@
     Author     : Bartłomiej Skibiński
 */
 body {
-    background: #f8f8f8; /*TODO: Zmienić kolor*/
+    background: #f8f8f8; 
 }
 
 .section {
@@ -12,17 +12,17 @@ body {
 }
 
 .row-content {
-    margin: 24px 12px; /*TODO: Media Queries*/
+    margin: 24px 12px; 
 }
 
 .header-row {
     display: block;
-    background: white; /*TODO: Zmienić kolor*/
-    border-bottom: 1px solid #e0e0e0; /*TODO: Zmienić kolor*/
+    background: white; 
+    border-bottom: 1px solid #e0e0e0; 
 }
 
 .header-content-wrapper {
-    margin: 24px 12px; /*TODO: Media Queries*/
+    margin: 24px 12px; 
 }
 
 .header-logo {
@@ -31,36 +31,36 @@ body {
 
 .page-title-row {
     display: block;
-    background: #f8f8f8; /*TODO: Zmienić kolor*/
-    border-bottom: 1px solid #E0e0e0; /*TODO: Zmienić kolor*/
+    background: #f8f8f8; 
+    border-bottom: 1px solid #E0e0e0;
 }
 
 .page-title-content-wrapper {
-    margin: 16px 12px; /*TODO: Media Queries*/
+    margin: 16px 12px;
 }
 
 .page-title {
-    font-size: 18px; /*TODO: Media Queries*/
-    color:  #2d6f89; /*TODO: Zmienić kolor*/
+    font-size: 18px; 
+    color:  #2d6f89; 
 }
 
 .page-title i {
-    margin-right: 6px; /*TODO: Media Queries*/
-    color: #2d6f89; /*TODO: Zmienić kolor*/
+    margin-right: 6px; 
+    color: #2d6f89; 
 }
 
 .footer {
-    border-top: 1px solid #f4f7fc; /*TODO: Zmienić kolor*/
-    background: #f8f8f8; /*TODO: Zmienić kolor, ale taki sam jak body*/
+    border-top: 1px solid #f4f7fc; 
+    background: #f8f8f8; 
 }
 
 .footer-content-wrapper {
     text-align: right;
-    margin: 24px 12px; /*TODO: Media Queries*/
+    margin: 24px 12px; 
 }
 
 .footer-info {
-    font-size: 12px; /*TODO: Media Queries*/
+    font-size: 12px; 
 }
 
 .footer-authors {

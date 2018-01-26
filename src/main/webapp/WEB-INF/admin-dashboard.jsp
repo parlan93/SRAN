@@ -17,12 +17,34 @@
 
                 <%@include file="jspf/title.jspf" %>
 
+                <c:if test="${enabled eq 'successed'}">
+                    <div class="row segment-row">
+                        <div class="col-xs-12">
+                            <div class="alert alert-success">Pomyślnie aktywowano konto Użytkownika!</div>
+                        </div>
+                    </div>
+                </c:if>  
+                <c:if test="${disabled eq 'successed'}">
+                    <div class="row segment-row">
+                        <div class="col-xs-12">
+                            <div class="alert alert-success">Pomyślnie dezaktywowano konto Użytkownika!</div>
+                        </div>
+                    </div>
+                </c:if>  
+                <c:if test="${role eq 'successed'}">
+                    <div class="row segment-row">
+                        <div class="col-xs-12">
+                            <div class="alert alert-success">Pomyślnie edytowano uprawnienia Użytkownika!</div>
+                        </div>
+                    </div>
+                </c:if>  
+
                 <div class="row segment-row">
                     <div class="col-xs-12">
                         <span class="segment-title">Użytkownicy</span>
                     </div>
                 </div>
-                
+
                 <div class="row row-content admin-row">
                     <div class="col-xs-12">
 
@@ -78,45 +100,24 @@
                                             <c:when test="${counter.count % 2 == 0}">
                                                 <tr class="table-row table-row-even">
                                                     <td class="table-cell row-actions">
-                                                        <a href="${currentPage.link}/users/show/${item.userid}" title="Podgląd" class="btn btn-info button-table"><i class="fa fa-eye"></i></a>
-                                                        <a href="${currentPage.link}/users/activate/${item.userid}" title="Aktywuj" class="btn btn-success button-table"><i class="fa fa-toggle-on"></i></a>
-                                                        <a href="${currentPage.link}/users/deactivate/${item.userid}" title="Dezaktywuj" class="btn btn-danger button-table"><i class="fa fa-toggle-off"></i></a>
-                                                    </td>
-                                                    <td class="table-cell">${item.title} ${item.firstname} ${item.lastname}</td>
-                                                    <td class="table-cell">${item.email}</td>
-                                                    <td class="table-cell">${item.organization}</td>
-                                                    <td class="table-cell">${item.userName}</td>
-                                                    <c:choose>
-                                                        <c:when test="${item.enabled eq 0}">
-                                                            <td class="table-cell">Nie</td>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <td class="table-cell">Tak</td>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                    <c:choose>
-                                                        <c:when test="${roles[item.userName] eq '[ADMIN]'}">
-                                                            <td class="table-cell">Administrator</td>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <c:choose>
-                                                                <c:when test="${roles[item.userName] eq '[REVIEWER]'}">
-                                                                    <td class="table-cell">Recenzent</td>
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                    <td class="table-cell">Autor</td>
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </tr>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <tr class="table-row table-row-odd">
-                                                    <td class="table-cell row-actions">
-                                                        <a href="${currentPage.link}/users/show/${item.userid}" title="Podgląd" class="btn btn-info button-table"><i class="fa fa-eye"></i></a>
-                                                        <a href="${currentPage.link}/users/activate/${item.userid}" title="Aktywuj" class="btn btn-success button-table"><i class="fa fa-toggle-on"></i></a>
-                                                        <a href="${currentPage.link}/users/deactivate/${item.userid}" title="Dezaktywuj" class="btn btn-danger button-table"><i class="fa fa-toggle-off"></i></a>
+                                                        <a href="${currentPage.link}/users/show/${item.userid}" title="Podgląd" class="btn btn-info button-table">
+                                                            <i class="fa fa-eye"></i>
+                                                        </a>
+                                                        <a href="${currentPage.link}/users/role/${item.userid}" title="Edytuj uprawnienia" class="btn btn-warning button-table">
+                                                            <i class="fa fa-id-card-o"></i>
+                                                        </a>
+                                                        <c:choose>
+                                                            <c:when test="${item.enabled eq 1}">
+                                                                <a href="${currentPage.link}/users/deactivate/${item.userid}" title="Dezaktywuj" class="btn btn-danger button-table">
+                                                                    <i class="fa fa-toggle-off"></i>
+                                                                </a>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <a href="${currentPage.link}/users/activate/${item.userid}" title="Aktywuj" class="btn btn-success button-table">
+                                                                    <i class="fa fa-toggle-on"></i>
+                                                                </a>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </td>
                                                     <td class="table-cell">${item.title} ${item.firstname} ${item.lastname}</td>
                                                     <td class="table-cell">${item.email}</td>
@@ -141,7 +142,65 @@
                                                                 </c:when>
                                                                 <c:otherwise>
                                                                     <c:choose>
-                                                                        <c:when test="${roles[item.userName] eq '[AUTOR]'}">
+                                                                        <c:when test="${roles[item.userName] eq '[AUTHOR]'}">
+                                                                            <td class="table-cell">Autor</td>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <td class="table-cell">-</td>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </tr>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <tr class="table-row table-row-odd">
+                                                    <td class="table-cell row-actions">
+                                                        <a href="${currentPage.link}/users/show/${item.userid}" title="Podgląd" class="btn btn-info button-table">
+                                                            <i class="fa fa-eye"></i>
+                                                        </a>
+                                                        <a href="${currentPage.link}/users/role/${item.userid}" title="Edytuj uprawnienia" class="btn btn-warning button-table">
+                                                            <i class="fa fa-id-card-o"></i>
+                                                        </a>
+                                                        <c:choose>
+                                                            <c:when test="${item.enabled eq 1}">
+                                                                <a href="${currentPage.link}/users/deactivate/${item.userid}" title="Dezaktywuj" class="btn btn-danger button-table">
+                                                                    <i class="fa fa-toggle-off"></i>
+                                                                </a>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <a href="${currentPage.link}/users/activate/${item.userid}" title="Aktywuj" class="btn btn-success button-table">
+                                                                    <i class="fa fa-toggle-on"></i>
+                                                                </a>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </td>
+                                                    <td class="table-cell">${item.title} ${item.firstname} ${item.lastname}</td>
+                                                    <td class="table-cell">${item.email}</td>
+                                                    <td class="table-cell">${item.organization}</td>
+                                                    <td class="table-cell">${item.userName}</td>
+                                                    <c:choose>
+                                                        <c:when test="${item.enabled eq 0}">
+                                                            <td class="table-cell">Nie</td>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <td class="table-cell">Tak</td>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                    <c:choose>
+                                                        <c:when test="${roles[item.userName] eq '[ADMIN]'}">
+                                                            <td class="table-cell">Administrator</td>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <c:choose>
+                                                                <c:when test="${roles[item.userName] eq '[REVIEWER]'}">
+                                                                    <td class="table-cell">Recenzent</td>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <c:choose>
+                                                                        <c:when test="${roles[item.userName] eq '[AUTHOR]'}">
                                                                             <td class="table-cell">Autor</td>
                                                                         </c:when>
                                                                         <c:otherwise>
@@ -163,13 +222,13 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="row segment-row">
                     <div class="col-xs-12">
                         <span class="segment-title">Artykuły</span>
                     </div>
                 </div>
-                
+
                 <div class="row row-content admin-row">
                     <div class="col-xs-12">
                         <div class="table-wrapper">

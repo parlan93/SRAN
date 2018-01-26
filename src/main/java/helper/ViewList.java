@@ -21,4 +21,10 @@ public class ViewList {
     public static final ViewItem AUTHOR_ARTICLE_DETAILS = new ViewItem("Artykuł", "fa-file-o", "/author/details");
     public static final ViewItem AUTHOR_ARTICLE_ADD = new ViewItem("Dodaj artykuł", "fa-plus-square", "/author/add-article");
     public static final ViewItem AUTHOR_ARTICLE_REVISION = new ViewItem("Dodaj poprawioną wersję artykułu", "fa-plus-square", "/author/add-revised-article");
+    
+    public static final ViewItem ADMIN_USER_DETAILS = new ViewItem("Informacje o Użytkowniku", "fa-user", "/admin/users");
+    public static final ViewItem ADMIN_USER_ROLE = new ViewItem("Ranga Użytkownika", "fa-id-card-o", "/admin/users/role");
+    public static final ViewItem ADMIN_ARTICLE_DETAILS = new ViewItem("Informacje o artyule", "fa-file-o", "/admin/articles");
+    public static final ViewItem ADMIN_ARTICLE_REVIEWERS = new ViewItem("Recenzenci", "fa-users", "/admin/articles/reviewers");
+    public static final ViewItem ADMIN_ARTICLE_EDIT = new ViewItem("Edycja artykułu", "fa-file-o", "/admin/articles/edit");
 }
