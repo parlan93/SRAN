@@ -1,5 +1,7 @@
 package domain;
 
+import domain.enumerator.ArticleStatus;
+import domain.enumerator.ReviewStatus;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

@@ -87,10 +87,10 @@
                                     <div class="panel-body">
                                         <c:forEach items="${reviews}" var="review" varStatus="counter">
                                             <c:choose>
-                                                <c:when test="${review.reviewStatus.plName eq 'Pozytywna'}">
+                                                <c:when test="${review.reviewDetails.reviewFinalRecommendation.name eq 'Accept with no changes' or review.reviewDetails.reviewFinalRecommendation.name eq 'Accept after minor revisions (without 2nd review'}">
                                                     <div class="panel panel-green">
                                                         <div class="panel-heading">
-                                                            Recenzja ${counter.index + 1} - ${review.reviewStatus.plName}
+                                                            Recenzja ${counter.index + 1} - ${review.reviewDetails.reviewFinalRecommendation.name}
                                                         </div>
                                                         <div class="panel-body">
                                                             <div class="form-group">
@@ -119,10 +119,10 @@
                                                 </c:when>
                                                 <c:otherwise>
                                                     <c:choose>
-                                                        <c:when test="${review.reviewStatus.plName eq 'Negatywna'}">
+                                                        <c:when test="${review.reviewDetails.reviewFinalRecommendation.name eq 'Reject'}">
                                                             <div class="panel panel-red">
                                                                 <div class="panel-heading">
-                                                                    Recenzja ${counter.index + 1} - ${review.reviewStatus.plName}
+                                                                    Recenzja ${counter.index + 1} - ${review.reviewDetails.reviewFinalRecommendation.name}
                                                                 </div>
                                                                 <div class="panel-body">
                                                                     <div class="form-group">
@@ -150,34 +150,60 @@
                                                             </div>
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <div class="panel panel-yellow">
-                                                                <div class="panel-heading">
-                                                                    Recenzja ${counter.index + 1} - ${review.reviewStatus.plName}
-                                                                </div>
-                                                                <div class="panel-body">
-                                                                    <div class="form-group">
-                                                                        <label>Recenzent</label>
-                                                                        <p class="form-control-static">${review.user.title} ${review.user.firstname} ${review.user.lastname}</p>
+                                                            <c:choose>
+                                                                <c:when test="${review.reviewDetails.reviewFinalRecommendation.name eq 'Revise and resubmit'}">
+                                                                    <div class="panel panel-yellow">
+                                                                        <div class="panel-heading">
+                                                                            Recenzja ${counter.index + 1} - ${review.reviewDetails.reviewFinalRecommendation.name}
+                                                                        </div>
+                                                                        <div class="panel-body">
+                                                                            <div class="form-group">
+                                                                                <label>Recenzent</label>
+                                                                                <p class="form-control-static">${review.user.title} ${review.user.firstname} ${review.user.lastname}</p>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>Email</label>
+                                                                                <p class="form-control-static">${review.user.email}</p>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>Organizacja</label>
+                                                                                <p class="form-control-static">${review.user.organization}</p>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>Recenzja</label>
+                                                                                <p class="form-control-static">${review.description}</p>
+                                                                            </div>
+                                                                            <form action="${currentPage.link}/review/${review.reviewId}" method="post" id="review-${counter.index}">
+                                                                                <input type="hidden" name="articleId" value="${review.article.articleId}" />
+                                                                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                                                                <input type="submit" name="submit" value="PDF" class="btn btn-default" />
+                                                                            </form>
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="form-group">
-                                                                        <label>Email</label>
-                                                                        <p class="form-control-static">${review.user.email}</p>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <div class="panel panel-default">
+                                                                        <div class="panel-heading">
+                                                                            Recenzja ${counter.index + 1} - NIEWYSTAWIONA
+                                                                        </div>
+                                                                        <div class="panel-body">
+                                                                            <div class="form-group">
+                                                                                <label>Recenzent</label>
+                                                                                <p class="form-control-static">${review.user.title} ${review.user.firstname} ${review.user.lastname}</p>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>Email</label>
+                                                                                <p class="form-control-static">${review.user.email}</p>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>Organizacja</label>
+                                                                                <p class="form-control-static">${review.user.organization}</p>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="form-group">
-                                                                        <label>Organizacja</label>
-                                                                        <p class="form-control-static">${review.user.organization}</p>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label>Recenzja</label>
-                                                                        <p class="form-control-static">${review.description}</p>
-                                                                    </div>
-                                                                    <form action="${currentPage.link}/review/${review.reviewId}" method="post" id="review-${counter.index}">
-                                                                        <input type="hidden" name="articleId" value="${review.article.articleId}" />
-                                                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                                                                        <input type="submit" name="submit" value="PDF" class="btn btn-default" />
-                                                                    </form>
-                                                                </div>
-                                                            </div>
+                                                                </c:otherwise>
+                                                            </c:choose>
+
                                                         </c:otherwise>
                                                     </c:choose>
                                                 </c:otherwise>

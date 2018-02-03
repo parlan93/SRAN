@@ -3,9 +3,22 @@ package controller;
 import domain.Article;
 import domain.ArticleRepository;
 import domain.Review;
+import domain.ReviewDetails;
 import domain.ReviewRepository;
-import domain.ReviewStatus;
+import domain.enumerator.ReviewStatus;
 import domain.UserRepository;
+import domain.enumerator.ReviewAFU;
+import domain.enumerator.ReviewAbstract;
+import domain.enumerator.ReviewConclusionDrawn;
+import domain.enumerator.ReviewContent;
+import domain.enumerator.ReviewFinalRecommendation;
+import domain.enumerator.ReviewIllustrations;
+import domain.enumerator.ReviewLanguage;
+import domain.enumerator.ReviewLiteratureReferences;
+import domain.enumerator.ReviewOverallEvaluation;
+import domain.enumerator.ReviewPresentation;
+import domain.enumerator.ReviewScope;
+import domain.enumerator.ReviewTables;
 import helper.ViewList;
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -45,7 +58,7 @@ public class ReviewerController {
 
     @Autowired
     private ArticleRepository articleRepository;
-
+    
     @RequestMapping(value = "")
     public String reviewerDashboard(
             @RequestParam(value = "success", required = false) String success,
@@ -71,15 +84,33 @@ public class ReviewerController {
 
     @RequestMapping(value = "/review/save", method = RequestMethod.POST)
     public String saveReview(
-            @RequestParam(value = "review-status") String reviewStatus,
+            @RequestParam(value = "review-scope", required = true) String reviewScope,
+            @RequestParam(value = "review-content", required = true) String reviewContent,
+            @RequestParam(value = "review-conclusion-drawn", required = true) String reviewConclusionDrawn,
+            @RequestParam(value = "review-presentation", required = true) String reviewPresentation,
+            @RequestParam(value = "review-language", required = true) String reviewLanguage,
+            @RequestParam(value = "review-abstract", required = true) String reviewAbstract,
+            @RequestParam(value = "review-illustrations", required = true) String reviewIllustrations,
+            @RequestParam(value = "review-tables", required = true) String reviewTables,
+            @RequestParam(value = "review-afu", required = true) String reviewAFU,
+            @RequestParam(value = "review-literature-references", required = true) String reviewLiteratureReferences,
+            @RequestParam(value = "review-overall-evaluation", required = true) String reviewOverallEvaluation,
+            @RequestParam(value = "review-final-recommendation", required = true) String reviewFinalRecommendation,
             @RequestParam(value = "description", required = false) String description,
             @RequestParam(value = "article-id") String articleId,
             Model model, Principal principal) {
+        ReviewDetails reviewDetails = new ReviewDetails(
+                ReviewScope.valueOf(reviewScope), ReviewContent.valueOf(reviewContent), 
+                ReviewConclusionDrawn.valueOf(reviewConclusionDrawn), ReviewPresentation.valueOf(reviewPresentation), 
+                ReviewLanguage.valueOf(reviewLanguage), ReviewAbstract.valueOf(reviewAbstract), 
+                ReviewIllustrations.valueOf(reviewIllustrations), ReviewTables.valueOf(reviewTables), 
+                ReviewAFU.valueOf(reviewAFU), ReviewLiteratureReferences.valueOf(reviewLiteratureReferences), 
+                ReviewOverallEvaluation.valueOf(reviewOverallEvaluation), ReviewFinalRecommendation.valueOf(reviewFinalRecommendation));
         Review review = reviewRepository.findByUserAndArticle(
                 userRepository.findByUserName(principal.getName()),
                 articleRepository.findOne(Long.valueOf(articleId)));
-        review.setReviewStatus(ReviewStatus.valueOf(reviewStatus));
         review.setDescription(description);
+        review.setReviewDetails(reviewDetails);
         reviewRepository.save(review);
         return "redirect:/reviewer?success=saved";
     }
@@ -109,7 +140,7 @@ public class ReviewerController {
 
         FileCopyUtils.copy(inputStream, response.getOutputStream());
     }
-    
+
     @RequestMapping(value = "/show/revised/{id}")
     public void showRevisedArticle(@PathVariable(value = "id") String articleId, HttpServletResponse response) throws FileNotFoundException, IOException {
         Article article = articleRepository.findOne(Long.valueOf(articleId));

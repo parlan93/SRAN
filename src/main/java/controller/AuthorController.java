@@ -2,9 +2,9 @@ package controller;
 
 import domain.Article;
 import domain.ArticleRepository;
-import domain.ArticleStatus;
+import domain.enumerator.ArticleStatus;
 import domain.ReviewRepository;
-import domain.ReviewStatus;
+import domain.enumerator.ReviewStatus;
 import domain.UserRepository;
 import helper.FileReaderHelper;
 import helper.ViewList;

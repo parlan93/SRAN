@@ -1,4 +1,4 @@
-package domain;
+package domain.enumerator;
 
 /**
  *
@@ -11,7 +11,7 @@ public enum ReviewStatus {
     POSITIVE("Positive", "Pozytywna"),
     NEGATIVE("Negative", "Negatywna"),
     AMBIGUOUS("Ambiguous", "Niejednoznaczny");
-
+    
     private final String enName;
     private final String plName;
 

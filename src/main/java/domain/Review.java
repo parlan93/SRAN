@@ -4,13 +4,13 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -36,9 +36,9 @@ public class Review implements Serializable {
     @JoinColumn(name = "userid")
     private User user;
 
-    @Enumerated
-    @Column(name = "review_status")
-    private ReviewStatus reviewStatus;
+    @OneToOne(fetch = FetchType.EAGER, targetEntity = ReviewDetails.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "reviewDetailsId")
+    private ReviewDetails reviewDetails;
 
     @Column(name = "description", length = 2047)
     private String description;
@@ -46,17 +46,16 @@ public class Review implements Serializable {
     public Review() {
     }
 
-    public Review(Article article, User user, ReviewStatus reviewStatus, String description) {
+    public Review(Article article, User user, ReviewDetails reviewDetails, String description) {
         this.article = article;
         this.user = user;
-        this.reviewStatus = reviewStatus;
+        this.reviewDetails = reviewDetails;
         this.description = description;
     }
 
-    public Review(Article article, User user, ReviewStatus reviewStatus) {
+    public Review(Article article, User user) {
         this.article = article;
         this.user = user;
-        this.reviewStatus = reviewStatus;
     }
 
     public Long getReviewId() {
@@ -79,20 +78,20 @@ public class Review implements Serializable {
         this.user = user;
     }
 
-    public ReviewStatus getReviewStatus() {
-        return reviewStatus;
-    }
-
-    public void setReviewStatus(ReviewStatus reviewStatus) {
-        this.reviewStatus = reviewStatus;
-    }
-
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public ReviewDetails getReviewDetails() {
+        return reviewDetails;
+    }
+
+    public void setReviewDetails(ReviewDetails reviewDetails) {
+        this.reviewDetails = reviewDetails;
     }
 
 }

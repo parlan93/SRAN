@@ -2,10 +2,10 @@ package controller;
 
 import domain.Article;
 import domain.ArticleRepository;
-import domain.ArticleStatus;
+import domain.enumerator.ArticleStatus;
 import domain.Review;
 import domain.ReviewRepository;
-import domain.ReviewStatus;
+import domain.enumerator.ReviewStatus;
 import domain.User;
 import domain.UserRepository;
 import domain.UserRole;
@@ -26,6 +26,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import pdf.ReviewToPdf;
 
 /**
  *
@@ -264,8 +266,8 @@ public class AdminController {
                 if (!firstId.equals(secondId)) {
                     if (reviews.size() != 2) {
                         reviewRepository.save(Arrays.asList(
-                                new Review(article, userRepository.findOne(Long.valueOf(firstId)), ReviewStatus.TO_REVIEW),
-                                new Review(article, userRepository.findOne(Long.valueOf(secondId)), ReviewStatus.TO_REVIEW)
+                                new Review(article, userRepository.findOne(Long.valueOf(firstId))),
+                                new Review(article, userRepository.findOne(Long.valueOf(secondId)))
                         ));
                         article.setReviewStatus(ReviewStatus.TO_REVIEW);
                         article.setArticleStatus(ArticleStatus.WAITING_FOR_REVIEW);
@@ -279,7 +281,7 @@ public class AdminController {
                 }
             } else {
                 if (!firstId.equals(secondId) && !firstId.equals(thirdId) && !secondId.equals(thirdId)) {
-                    reviewRepository.save(new Review(article, userRepository.findOne(Long.valueOf(thirdId)), ReviewStatus.TO_REVIEW));
+                    reviewRepository.save(new Review(article, userRepository.findOne(Long.valueOf(thirdId))));
                     article.setReviewStatus(ReviewStatus.TO_REVIEW);
                     article.setArticleStatus(ArticleStatus.WAITING_FOR_REVIEW);
                     articleRepository.save(article);
@@ -315,6 +317,16 @@ public class AdminController {
         article.setArticleStatus(articleStatusEnum);
         articleRepository.save(article);
         return "redirect:/admin/articles/edit/" + articleId + "?success=1";
+    }
+    
+    @RequestMapping(value = "/articles/review/{reviewId}")
+    public ModelAndView reviewToPdf(
+            @PathVariable(value = "reviewId") String reviewId,
+            @RequestParam(value = "articleId") String articleId) {
+        Map<String, Object> model = new HashMap<String, Object>();
+        model.put("article", articleRepository.findOne(Long.valueOf(articleId)));
+        model.put("review", reviewRepository.findOne(Long.valueOf(reviewId)));
+        return new ModelAndView(new ReviewToPdf(), model);
     }
 
 }

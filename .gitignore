@@ -52,3 +52,7 @@ Temporary Items
 /.project
 /sql.txt
 /.settings/
+/nb-configuration.xml
+/src/main/java/controller/RestGrade.java
+/src/main/java/controller/RestReservation.java
+/src/main/java/controller/RestGuest.java

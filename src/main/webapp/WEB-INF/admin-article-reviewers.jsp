@@ -104,7 +104,7 @@
                                         </c:when>
                                         <c:otherwise>
                                             <c:choose>
-                                                <c:when test="${article.reviewStatus.plName eq 'Niejednoznaczny'}">
+                                                <c:when test="${article.reviewStatus.plName eq 'Niejednoznaczny' or article.reviewStatus.plName eq 'Do ponownej recenzji'}">
                                                     <div class="form-group">
                                                         <label>Recenzent 3</label>
                                                         <select class="form-control" name="reviewer-3" required="">

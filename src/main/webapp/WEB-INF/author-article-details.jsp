@@ -89,10 +89,10 @@
                                             <div class="panel-body">
                                                 <c:forEach items="${reviews}" var="review" varStatus="counter">
                                                     <c:choose>
-                                                        <c:when test="${review.reviewStatus.plName eq 'Pozytywna'}">
+                                                        <c:when test="${review.reviewDetails.reviewFinalRecommendation.name eq 'Accept with no changes' or review.reviewDetails.reviewFinalRecommendation.name eq 'Accept after minor revisions (without 2nd review'}">
                                                             <div class="panel panel-green">
                                                                 <div class="panel-heading">
-                                                                    Recenzja ${counter.index + 1} - ${review.reviewStatus.plName}
+                                                                    Recenzja ${counter.index + 1} - ${review.reviewDetails.reviewFinalRecommendation.name}
                                                                 </div>
                                                                 <div class="panel-body">
                                                                     <div class="form-group">
@@ -121,10 +121,10 @@
                                                         </c:when>
                                                         <c:otherwise>
                                                             <c:choose>
-                                                                <c:when test="${review.reviewStatus.plName eq 'Negatywna'}">
+                                                                <c:when test="${review.reviewDetails.reviewFinalRecommendation.name eq 'Reject'}">
                                                                     <div class="panel panel-red">
                                                                         <div class="panel-heading">
-                                                                            Recenzja ${counter.index + 1} - ${review.reviewStatus.plName}
+                                                                            Recenzja ${counter.index + 1} - ${review.reviewDetails.reviewFinalRecommendation.name}
                                                                         </div>
                                                                         <div class="panel-body">
                                                                             <div class="form-group">
@@ -154,7 +154,7 @@
                                                                 <c:otherwise>
                                                                     <div class="panel panel-yellow">
                                                                         <div class="panel-heading">
-                                                                            Recenzja ${counter.index + 1} - ${review.reviewStatus.plName}
+                                                                            Recenzja ${counter.index + 1} - ${review.reviewDetails.reviewFinalRecommendation.name}
                                                                         </div>
                                                                         <div class="panel-body">
                                                                             <div class="form-group">

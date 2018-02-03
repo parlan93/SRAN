@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ReviewToPdf extends AbstractPdfView {
 
+    //TODO: Edytować pdf z recenzją
     @Override
     protected void buildPdfDocument(Map<String, Object> model, Document document, PdfWriter pdfWriter, HttpServletRequest request, HttpServletResponse response) throws Exception {
         Article article = (Article) model.get("article");
@@ -41,7 +42,6 @@ public class ReviewToPdf extends AbstractPdfView {
         document.add(authors);
         
         Paragraph reviewInfo = new Paragraph();
-        reviewInfo.add(new Paragraph("Recenzja: " + review.getReviewStatus().getPlName(), headerFont));
         reviewInfo.add(new Paragraph("Recenzent: " + review.getUser().getTitle() + " " + review.getUser().getFirstname() + " " + review.getUser().getLastname(), contentFont));
         reviewInfo.add(new Paragraph("Organizacja: " + review.getUser().getOrganization(), contentFont));
         reviewInfo.add(separator);

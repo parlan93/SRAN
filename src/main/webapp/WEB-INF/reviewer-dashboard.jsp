@@ -72,7 +72,7 @@
                                                             </c:otherwise>
                                                         </c:choose>
                                                         <c:choose>
-                                                            <c:when test="${item.reviewStatus.plName eq 'Do recenzji' or item.reviewStatus.plName eq 'Do ponownej recenzji'}">
+                                                            <c:when test="${item.reviewDetails.reviewFinalRecommendation eq null}">
                                                                 <a href="${currentPage.link}/review/${item.article.articleId}" title="Wystaw recenzję" class="btn btn-warning button-table">
                                                                     <i class="fa fa-pencil-square-o"></i>
                                                                 </a>
@@ -82,7 +82,7 @@
                                                         </c:choose>
                                                     </td>
                                                     <td class="table-cell">${item.article.title}</td>
-                                                    <td class="table-cell">${item.reviewStatus.plName}</td>
+                                                    <td class="table-cell">${item.reviewDetails.reviewFinalRecommendation.name}</td>
                                                 </tr>
                                             </c:when>
                                             <c:otherwise>
@@ -101,7 +101,7 @@
                                                             </c:otherwise>
                                                         </c:choose>
                                                         <c:choose>
-                                                            <c:when test="${item.reviewStatus.plName eq 'Do recenzji' or item.reviewStatus.plName eq 'Do ponownej recenzji'}">
+                                                            <c:when test="${item.reviewDetails.reviewFinalRecommendation eq null}">
                                                                 <a href="${currentPage.link}/review/${item.article.articleId}" title="Wystaw recenzję" class="btn btn-warning button-table">
                                                                     <i class="fa fa-pencil-square-o"></i>
                                                                 </a>
@@ -111,7 +111,7 @@
                                                         </c:choose>
                                                     </td>
                                                     <td class="table-cell">${item.article.title}</td>
-                                                    <td class="table-cell">${item.reviewStatus.plName}</td>
+                                                    <td class="table-cell">${item.reviewDetails.reviewFinalRecommendation.name}</td>
                                                 </tr>
                                             </c:otherwise>
                                         </c:choose>
